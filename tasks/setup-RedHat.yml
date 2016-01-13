@@ -1,6 +1,11 @@
 ---
-- name: Ensure gcc is installed (Varnish dependency).
-  yum: name=gcc state=present
+- name: Ensure EPEL and gcc are installed (Varnish dependency).
+  yum: 
+    name={{ item }}
+    state=present
+  with_items:
+    - gcc
+    - epel-release
 
 - name: Add Varnish repository.
   command: >
