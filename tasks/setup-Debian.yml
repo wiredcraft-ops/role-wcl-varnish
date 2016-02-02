@@ -17,3 +17,11 @@
     owner: root
     group: root
     mode: 0755
+
+# - name: Copy logrotate configuration for Varnish
+#   copy:
+#     src: logrotate.d/varnish
+#     dest: /etc/logrotate.d/varnish
+#     owner: root
+#     group: root
+#     mode: 644

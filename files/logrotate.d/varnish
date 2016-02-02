@@ -1,0 +1,14 @@
+/var/log/varnish/varnish*.log {
+    daily
+    rotate 30
+    missingok
+    notifempty
+    compress
+    dateext
+    sharedscripts
+    postrotate
+        /bin/kill -HUP `cat /run/varnishncsa.pid 2> /dev/null` 2> /dev/null || true
+        /bin/kill -HUP `cat /run/varnishlog.pid 2> /dev/null` 2> /dev/null || true
+        (systemctl stop rsyslog && rm /var/lib/rsyslog/stat-varnish* ; systemctl start rsyslog 2>&1) || true
+    endscript
+}

@@ -37,3 +37,17 @@
     name=varnish 
     state=started 
     enabled=yes
+
+- name: Ensure Varnishncsa is started and set to run on startup.
+  service:
+    name=varnishncsa
+    state=started
+    enabled=yes
+  when: varnishncsa_enabled
+
+- name: Ensure Varnishlog is started and set to run on startup.
+  service:
+    name=varnishlog
+    state=started
+    enabled=yes
+  when: varnishlog_enabled
