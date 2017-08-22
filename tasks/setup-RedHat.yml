@@ -44,4 +44,4 @@
     dest: /etc/logrotate.d/varnish
     owner: root
     group: root
-    mode: 644
+    mode: 0644
