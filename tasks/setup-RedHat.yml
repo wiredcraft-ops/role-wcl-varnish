@@ -8,17 +8,17 @@
     - epel-release
 
 - name: Add Varnish repository.
-  command: >
-    rpm --nosignature -i https://repo.varnish-cache.org/redhat/varnish-{{ varnish_version }}.el{{ ansible_distribution_major_version }}.rpm
-    creates=/var/lib/yum/repos/x86_64/{{ ansible_distribution_major_version }}/varnish-{{ varnish_version }}
+  command: |
+    curl -s https://packagecloud.io/install/repositories/varnishcache/varnish41/script.rpm.sh | bash
+    creates=/etc/yum.repos.d/varnishcache_varnish41.repo
   ignore_errors: true
 
 - name: Install Varnish.
   yum:
     name: varnish
     state: installed
-    enablerepo: "varnish-{{ varnish_version }},epel"
-    disablerepo: "*"
+    # enablerepo: "varnish-{{ varnish_version }},epel"
+    # disablerepo: "*"
 
 - name: Copy Varnish configuration (sysvinit).
   template:
